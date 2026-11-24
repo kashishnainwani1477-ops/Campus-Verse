@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusVerse | Your Campus Universe</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .page:not(.active) {
+            display: none;
+        }
+
+        #page-events .events-page {
+            background: #0b1025;
+            color: white;
+            min-height: 100vh;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+        }
+
+        #page-events .events-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        #page-events .events-header a {
+            color: white;
+            text-decoration: none;
+            background: #3979e8;
+            padding: 10px 18px;
+            border-radius: 8px;
+        }
+
+        #page-events .events-banner {
+            background: linear-gradient(120deg, #3979e8, #8055db);
+            padding: 35px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+
+        #page-events .events-banner h1 {
+            font-size: 32px;
+        }
+
+        #page-events .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 22px;
+        }
+
+        #page-events .event-card {
+            background: #192747;
+            padding: 22px;
+            border-radius: 14px;
+            border: 1px solid #354b75;
+        }
+
+        #page-events .event-card h3 {
+            color: #83b5ff;
+        }
+
+        #page-events .event-card p {
+            color: #d5dced;
+            line-height: 1.6;
+        }
+
+        #page-events .event-card button {
+            background: #3979e8;
+            color: white;
+            border: none;
+            padding: 11px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #page-events .event-card button:hover {
+            background: #8055db;
+        }
+
+        @media(max-width: 600px) {
+            #page-events .events-page {
+                padding: 16px;
+            }
+            #page-events .events-header {
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+        }
+
+        #page-communities {
+            background: #0b1025;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+        #page-communities .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        #page-communities .back {
+            background: #3979e8;
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+        }
+
+        #page-communities .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        #page-communities .community-card {
+            background: #192747;
+            padding: 22px;
+            border-radius: 14px;
+            border: 1px solid #354b75;
+        }
+
+        #page-communities .community-card h3 {
+            color: #83b5ff;
+        }
+
+        #page-communities .community-card p {
+            color: #d5dced;
+            line-height: 1.5;
+        }
+
+        #page-communities .community-card button {
+            background: #3979e8;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #page-registrations {
+            background: #0b1025;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+        #page-registrations .registration-card {
+            background: #192747;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 12px;
+            border: 1px solid #354b75;
+        }
+
+        #page-registrations .registration-card h3 {
+            color: #83b5ff;
+        }
+
+        #page-registrations .back {
+            display: inline-block;
+            background: #3979e8;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+
+        #page-registrations .empty {
+            color: #cbd5e1;
+            margin-top: 25px;
+        }
+
+        #page-polls {
+            background: #0b1025;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+        #page-polls .back {
+            display: inline-block;
+            background: #3979e8;
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        #page-polls .poll-card {
+            background: #192747;
+            padding: 22px;
+            margin: 20px 0;
+            border-radius: 14px;
+            border: 1px solid #354b75;
+        }
+
+        #page-polls .poll-card h3 {
+            color: #83b5ff;
+        }
+
+        #page-polls .poll-card button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            background: #3979e8;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #page-polls .poll-card button:disabled {
+            background: #52627d;
+            cursor: not-allowed;
+        }
+
+        #page-polls .result {
+            color: #80e6b0;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="page-home" class="page active">
+
+    <nav class="navbar">
+        <div class="logo">CampusVerse ✨</div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#features">Explore</a>
+            <a href="#events">Events</a>
+            <a href="#community">Community</a>
+        </div>
+
+        <button class="login-btn"
+         onclick="showPage('login')">
+             Login
+        </button>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p class="tagline">WELCOME TO YOUR CAMPUS UNIVERSE</p>
+
+            <h1>
+                Your Campus.<br>
+                Your People.<br>
+                Your Universe.
+            </h1>
+
+            <p class="hero-text">
+                Discover college events, connect with students,
+                explore communities and experience campus life
+                like never before.
+            </p>
+
+            <button class="explore-btn"
+                onclick="exploreCampus()">
+                Explore Campus →
+            </button>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <h2>Explore CampusVerse</h2>
+        <p class="section-subtitle">
+            Everything happening on your campus, in one place.
+        </p>
+
+        <div class="feature-container">
+
+            <div class="feature-card" id="events">
+                <span>🎉</span>
+                <h3>Events & Fests</h3>
+                <p>Discover upcoming college events and fests.</p>
+            </div>
+
+            <div class="feature-card" id="community">
+                <span>👥</span>
+                <h3>Communities</h3>
+                <p>Connect with students who share your interests.</p>
+            </div>
+
+            <div class="feature-card">
+                <span>📊</span>
+                <h3>Campus Polls</h3>
+                <p>Share your opinions through anonymous polls.</p>
+            </div>
+
+            <div class="feature-card">
+                <span>🔍</span>
+                <h3>Lost & Found</h3>
+                <p>Find your lost belongings around campus.</p>
+            </div>
+
+            <div class="feature-card" onclick="showPage('assistant')">
+                <span>🤖</span>
+                <h3>AI Assistant</h3>
+                <p>Get answers to your campus-related questions.</p>
+            </div>
+
+            <div class="feature-card">
+                <span>🏆</span>
+                <h3>Clubs & Societies</h3>
+                <p>Explore clubs and discover new opportunities.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <h2>CampusVerse ✨</h2>
+        <p>Your Campus. Your Universe.</p>
+        <p>© 2026 CampusVerse. All rights reserved.</p>
+    </footer>
+
+    </div>
+
+    <div id="page-login" class="page auth-page">
+
+    <div class="auth-card">
+
+        <h1>CampusVerse ✨</h1>
+
+        <p class="auth-subtitle">
+            Welcome back to your campus universe!
+        </p>
+
+        <h2>Login to your account</h2>
+
+        <form onsubmit="loginUser(event)">
+
+            <label>Email Address</label>
+            <input type="email"
+                   id="loginEmail"
+                   placeholder="Enter your email"
+                   required>
+
+            <label>Password</label>
+            <input type="password"
+                   id="loginPassword"
+                   placeholder="Enter your password"
+                   required>
+
+            <button type="submit" class="auth-button">
+                Login
+            </button>
+
+        </form>
+
+        <p class="auth-footer">
+            Don't have an account?
+            <a href="#signup" onclick="showPage('signup'); return false;">Sign Up</a>
+        </p>
+
+        <a href="#home" class="back-home" onclick="showPage('home'); return false;">
+            ← Back to Home
+        </a>
+
+    </div>
+
+    </div>
+
+    <div id="page-signup" class="page auth-page">
+
+    <div class="auth-card">
+
+        <h1>CampusVerse ✨</h1>
+
+        <p class="auth-subtitle">
+            Join your campus universe!
+        </p>
+
+        <h2>Create Your Account</h2>
+
+        <form onsubmit="signupUser(event)">
+
+            <label>Full Name</label>
+            <input type="text"
+                   id="fullName"
+                   placeholder="Enter your full name"
+                   required>
+
+            <label>College Email</label>
+            <input type="email"
+                   id="signupEmail"
+                   placeholder="Enter your email"
+                   required>
+
+            <label>Student ID</label>
+            <input type="text"
+                   id="studentId"
+                   placeholder="Enter your student ID"
+                   required>
+
+            <label>Password</label>
+            <input type="password"
+                   id="signupPassword"
+                   placeholder="Create a password"
+                   minlength="6"
+                   required>
+
+            <label>Confirm Password</label>
+            <input type="password"
+                   id="confirmPassword"
+                   placeholder="Confirm your password"
+                   minlength="6"
+                   required>
+
+            <button type="submit" class="auth-button">
+                Create Account
+            </button>
+
+        </form>
+
+        <p class="auth-footer">
+            Already have an account?
+            <a href="#login" onclick="showPage('login'); return false;">Login</a>
+        </p>
+
+        <a href="#home" class="back-home" onclick="showPage('home'); return false;">
+            ← Back to Home
+        </a>
+
+    </div>
+
+    </div>
+
+    <div id="page-dashboard" class="page dashboard-page">
+
+    <header class="dashboard-header">
+        <h2>CampusVerse ✨</h2>
+
+        <div class="dashboard-user">
+            <span>Welcome, Student!</span>
+            <button onclick="logoutUser()">Logout</button>
+        </div>
+    </header>
+
+    <div class="dashboard-layout">
+
+        <aside class="sidebar">
+            <h3>Menu</h3>
+
+            <a href="#dashboard" onclick="showPage('dashboard'); return false;">🏠 Dashboard</a>
+            <a href="#events.html">🎉 Events & Fests</a>
+            <a href="#registrations" onclick="showPage('registrations'); return false;">📋 My Registrations</a>
+            <a href="#communities" onclick="showPage('communities'); return false;">👥 Communities</a>
+            <a href="#polls" onclick="showPage('polls'); return false;">📊 Campus Polls</a>
+            <a href="#lost">🔍 Lost & Found</a>
+            <a href="#assistant" onclick="showPage('assistant'); return false;">🤖 AI Assistant</a>
+            <a href="#clubs">🏆 Clubs</a>
+        </aside>
+
+        <main class="dashboard-content">
+
+            <div class="dashboard-welcome">
+                <p>YOUR CAMPUS, YOUR UNIVERSE</p>
+                <h1>Welcome to CampusVerse! ✨</h1>
+                <p>
+                    Discover events, meet new people and
+                    make your college life unforgettable.
+                </p>
+            </div>
+
+            <h2>Explore Your Campus</h2>
+
+            <div class="dashboard-grid">
+
+                <div class="dashboard-card" id="events">
+                    <span>🎉</span>
+                    <h3>Events & Fests</h3>
+                    <p>Explore upcoming college events and fests.</p>
+                
+                    <button onclick="showPage('events')">
+                       
+                       Explore →
+                </button>
+                </div>
+
+                <div class="dashboard-card" id="communities">
+                    <span>👥</span>
+                    <h3>Communities</h3>
+                    <p>Connect with students sharing your interests.</p>
+                    <button onclick="showPage('communities')">
+                        Explore →
+                    </button>
+                </div>
+
+                <div class="dashboard-card" id="polls">
+                    <span>📊</span>
+                    <h3>Campus Polls</h3>
+                    <p>Share your opinions through campus polls.</p>
+                    <button onclick="showPage('polls')">
+                        Explore →
+                    </button>
+                </div>
+
+                <div class="dashboard-card" id="lost">
+                    <span>🔍</span>
+                    <h3>Lost & Found</h3>
+                    <p>Find lost items or report something found.</p>
+                    <button onclick="showPage('lost')">
+                        Explore →
+                    </button>
+                </div>
+
+                <div class="dashboard-card" id="assistant">
+                    <span>🤖</span>
+                    <h3>AI Assistant</h3>
+                    <p>Ask questions about your college campus.</p>
+                    <button onclick="showPage('assistant')">
+                        Explore →
+                    </button>
+                </div>
+
+                <div class="dashboard-card" id="clubs">
+                    <span>🏆</span>
+                    <h3>Clubs & Societies</h3>
+                    <p>Discover clubs and join exciting activities.</p>
+                    <button onclick="showPage('clubs')">
+                        Explore →
+                    </button>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    </div>
+
+    <div id="page-events" class="page">
+<div class="events-page">
+
+    <header class="events-header">
+        <h2>CampusVerse ✨</h2>
+        <a href="#dashboard" onclick="showPage('dashboard'); return false;">← Back to Dashboard</a>
+    </header>
+
+    <section class="events-banner">
+        <h1>Events & Fests 🎉</h1>
+        <p>Discover exciting events, participate in college fests
+        and make unforgettable memories!</p>
+    </section>
+
+    <h2>Upcoming Events</h2>
+
+    <div class="events-grid">
+
+        <div class="event-card">
+            <h3>🎵 Music Fest</h3>
+            <p>Enjoy live music, dance performances
+            and amazing entertainment.</p>
+            <p>📅 Date: To be announced</p>
+            <p>📍 Venue: College Campus</p>
+            <button onclick="openRegistration('Music Fest')">
+                Register Now
+            </button>
+
+        <div class="event-card">
+            <h3>💻 Tech Fest</h3>
+            <p>Participate in coding competitions,
+            quizzes and technical challenges.</p>
+            <p>📅 Date: To be announced</p>
+            <p>📍 Venue: College Campus</p>
+            <button onclick="openRegistration('Tech Fest')">
+                Register Now
+            </button>
+        </div>
+
+        <div class="event-card">
+            <h3>🎨 Cultural Fest</h3>
+            <p>Show your talent through art,
+            dance, fashion and cultural activities.</p>
+            <p>📅 Date: To be announced</p>
+            <p>📍 Venue: College Campus</p>
+            <button onclick="openRegistration('Cultural Fest')">
+                Register Now
+            </button>
+        </div>
+
+        <div class="event-card">
+            <h3>🏆 Sports Meet</h3>
+            <p>Take part in exciting sports
+            competitions and team activities.</p>
+            <p>📅 Date: To be announced</p>
+            <p>📍 Venue: College Ground</p>
+            <button onclick="openRegistration('Sports Meet')">
+                Register Now
+            </button>
+        </div>
+
+    </div>
+    <div id="registrationForm" style="display:none; background:#192747; padding:25px; border-radius:15px; margin-top:30px; max-width:500px;">
+
+        <h2>Event Registration 📝</h2>
+    
+        <form id="eventForm">
+            <input type="text" id="eventName" readonly
+            style="width:100%; padding:12px; margin:10px 0;">
+    
+            <input type="text" id="studentName"
+            placeholder="Enter your full name" required
+            style="width:100%; padding:12px; margin:10px 0;">
+    
+            <input type="email" id="studentEmail"
+            placeholder="Enter your email" required
+            style="width:100%; padding:12px; margin:10px 0;">
+    
+            <input type="text" id="studentCourse"
+            placeholder="Course and year" required
+            style="width:100%; padding:12px; margin:10px 0;">
+    
+            <button type="submit">Submit Registration</button>
+    
+            <button type="button"
+            onclick="document.getElementById('registrationForm').style.display='none'">
+            Cancel
+            </button>
+        </form>
+    </div>
+</div>
+    </div>
+    </div>
+
+    <div id="page-communities" class="page">
+
+    <div class="header">
+        <h1>Campus Communities 👥</h1>
+        <a href="#dashboard" class="back" onclick="showPage('dashboard'); return false;">← Dashboard</a>
+    </div>
+
+    <p>Find your people. Share your interests. Build connections!</p>
+
+    <div class="community-grid">
+
+        <div class="community-card">
+            <h3>💻 Coding Club</h3>
+            <p>Connect with students interested in programming and technology.</p>
+            <button onclick="joinCommunity('Coding Club')">Join Community</button>
+        </div>
+
+        <div class="community-card">
+            <h3>📸 Photography Club</h3>
+            <p>Share photography skills and capture campus memories.</p>
+            <button onclick="joinCommunity('Photography Club')">Join Community</button>
+        </div>
+
+        <div class="community-card">
+            <h3>🎵 Music Club</h3>
+            <p>Meet music lovers, singers and instrumentalists.</p>
+            <button onclick="joinCommunity('Music Club')">Join Community</button>
+        </div>
+
+        <div class="community-card">
+            <h3>🏏 Sports Club</h3>
+            <p>Connect with sports enthusiasts and players.</p>
+            <button onclick="joinCommunity('Sports Club')">Join Community</button>
+        </div>
+
+    </div>
+
+    </div>
+
+    <div id="page-registrations" class="page">
+
+    <h1>My Registrations 📋</h1>
+    <p>View all your registered campus events.</p>
+
+    <a href="#dashboard" class="back" onclick="showPage('dashboard'); return false;">
+        ← Back to Dashboard
+    </a>
+
+    <div id="registrationList"></div>
+
+    </div>
+
+    <div id="page-polls" class="page">
+
+    <h1>Campus Polls 📊</h1>
+    <p>Share your opinions and see what your campus thinks!</p>
+
+    <a href="#dashboard" class="back" onclick="showPage('dashboard'); return false;">
+        ← Back to Dashboard
+    </a>
+
+    <div class="poll-card">
+        <h3>1. Which event do you enjoy the most?</h3>
+
+        <button onclick="vote(0, 'Music Fest')">Music Fest</button>
+        <button onclick="vote(0, 'Tech Fest')">Tech Fest</button>
+        <button onclick="vote(0, 'Sports Meet')">Sports Meet</button>
+
+        <p class="result" id="result0"></p>
+    </div>
+
+    <div class="poll-card">
+        <h3>2. What should the college improve?</h3>
+
+        <button onclick="vote(1, 'Library')">Library</button>
+        <button onclick="vote(1, 'Cafeteria')">Cafeteria</button>
+        <button onclick="vote(1, 'Sports Facilities')">Sports Facilities</button>
+
+        <p class="result" id="result1"></p>
+    </div>
+
+    </div>
+
+    <div id="page-lost" class="page">
+
+<div class="events-page">
+
+    <h1>🔍 Campus Lost & Found</h1>
+    <p>Report lost items or help someone find their belongings.</p>
+
+    <button onclick="showPage('dashboard')">
+        ← Back to Dashboard
+    </button>
+
+    <div class="event-card">
+        <h2>Report an Item</h2>
+
+        <form id="lostFoundForm">
+
+            <label>Item Name</label>
+            <input type="text" id="itemName"
+                   placeholder="Enter item name" required>
+
+            <label>Report Type</label>
+            <select id="itemType" required>
+                <option value="">Select type</option>
+                <option value="Lost">Lost</option>
+                <option value="Found">Found</option>
+            </select>
+
+            <label>Description</label>
+            <textarea id="itemDescription"
+                      placeholder="Describe the item"
+                      required></textarea>
+
+            <label>Location</label>
+            <input type="text" id="itemLocation"
+                   placeholder="Where was it lost/found?" required>
+
+            <label>Contact Details</label>
+            <input type="text" id="itemContact"
+                   placeholder="Enter your contact details" required>
+
+            <button type="submit">Submit Report</button>
+
+        </form>
+    </div>
+
+    <h2>Recent Reports</h2>
+    <p id="successMessage" style="color: lightgreen; font-weight: bold;"></p>
+    <div id="reportsList"></div>
+
+</div>
+
+    </div>
+
+    <div id="page-clubs" class="page">
+
+    <h1>Clubs & Societies</h1>
+    <p>Explore clubs and become a part of campus life!</p>
+
+    <div class="club-container">
+
+        <div class="event-card">
+            <h2>💻 Coding Club</h2>
+            <p>Learn programming, participate in hackathons and improve your coding skills.</p>
+            <button onclick="joinClub('Coding Club')">Join Club</button>
+        </div>
+
+        <div class="event-card">
+            <h2>📸 Photography Club</h2>
+            <p>Explore photography, editing and creative activities.</p>
+            <button onclick="joinClub('Photography Club')">Join Club</button>
+        </div>
+
+        <div class="event-card">
+            <h2>🎵 Music Club</h2>
+            <p>Enjoy singing, instruments and musical performances.</p>
+            <button onclick="joinClub('Music Club')">Join Club</button>
+        </div>
+
+        <div class="event-card">
+            <h2>🏏 Sports Club</h2>
+            <p>Participate in sports activities and college tournaments.</p>
+            <button onclick="joinClub('Sports Club')">Join Club</button>
+        </div>
+
+    </div>
+
+    <h2>My Joined Clubs</h2>
+    <div id="myClubs"></div>
+
+    </div>
+
+    <div id="page-assistant" class="page">
+
+    <h1>🤖 CampusVerse AI Assistant</h1>
+    <p>Your smart campus helper. Ask me anything!</p>
+
+    <div class="event-card">
+
+        <div id="chatMessages">
+            <p><strong>Assistant:</strong> Hello! Welcome to CampusVerse. How can I help you?</p>
+        </div>
+
+        <input
+            type="text"
+            id="userMessage"
+            placeholder="Type your message here..."
+        >
+
+        <button onclick="sendMessage()">Send</button>
+        <button onclick="clearChat()">Clear Chat</button>
+
+    </div>
+
+    <h2>Suggested Questions</h2>
+
+    <button onclick="askQuestion('Tell me about events')">
+        College Events
+    </button>
+
+    <button onclick="askQuestion('Tell me about clubs')">
+        Clubs
+    </button>
+
+    <button onclick="askQuestion('How can I join a community?')">
+        Communities
+    </button>
+
+    </div>
+
+    <button
+        id="campusChatLauncher"
+        class="campus-chat-launcher"
+        type="button"
+        aria-label="Open CampusVerse assistant"
+        aria-expanded="false"
+        aria-controls="campusChatPanel"
+    >
+        <span aria-hidden="true">✦</span>
+        <span class="campus-chat-launcher-label">Ask CampusVerse</span>
+    </button>
+
+    <section
+        id="campusChatPanel"
+        class="campus-chat-panel"
+        role="dialog"
+        aria-labelledby="campusChatTitle"
+        aria-modal="false"
+        hidden
+    >
+        <header class="campus-chat-header">
+            <div class="campus-chat-brand">
+                <span class="campus-chat-avatar" aria-hidden="true">✦</span>
+                <div>
+                    <h2 id="campusChatTitle">CampusVerse Assistant</h2>
+                    <p><span class="campus-chat-status"></span> Here to help</p>
+                </div>
+            </div>
+            <button id="campusChatClose" class="campus-chat-close" type="button" aria-label="Close chat">×</button>
+        </header>
+
+        <div id="campusChatMessages" class="campus-chat-messages" aria-live="polite" aria-relevant="additions"></div>
+
+        <div class="campus-chat-suggestions" aria-label="Suggested questions">
+            <p>Try asking</p>
+            <button type="button" data-chat-question="What events and fests are coming up?">🎉 Events & fests</button>
+            <button type="button" data-chat-question="What clubs and communities can I join?">👥 Clubs & communities</button>
+            <button type="button" data-chat-question="How do campus polls work?">📊 Campus polls</button>
+            <button type="button" data-chat-question="How do I report a lost or found item?">🔍 Lost & found</button>
+        </div>
+
+        <form id="campusChatForm" class="campus-chat-form">
+            <label class="campus-chat-sr-only" for="campusChatInput">Your message</label>
+            <input id="campusChatInput" type="text" placeholder="Ask me about campus..." autocomplete="off" maxlength="500" required>
+            <button type="submit" aria-label="Send message">➤</button>
+        </form>
+        <p class="campus-chat-note">AI replies via OpenAI · Your API key stays on the server</p>
+    </section>
+
+    <script src="script.js"></script>
+    <script src="lostfound2.js"></script>
+    <script src="clubs.js"></script>
+    <script src="ai-assistant.js"></script>
+    <script src="chatbot.js"></script>
+    <script>
+        function openRegistration(event) {
+            document.getElementById("registrationForm").style.display = "block";
+            document.getElementById("eventName").value = event;
+
+            document.getElementById("registrationForm")
+                .scrollIntoView({ behavior: "smooth" });
+        }
+
+        document.getElementById("eventForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const registration = {
+                event: document.getElementById("eventName").value,
+                name: document.getElementById("studentName").value,
+                email: document.getElementById("studentEmail").value,
+                course: document.getElementById("studentCourse").value
+            };
+
+            let registrations = JSON.parse(
+                localStorage.getItem("campusRegistrations") || "[]"
+            );
+
+            registrations.push(registration);
+
+            localStorage.setItem(
+                "campusRegistrations",
+                JSON.stringify(registrations)
+            );
+
+            alert("Registration submitted successfully!");
+
+            document.getElementById("eventForm").reset();
+            document.getElementById("registrationForm").style.display = "none";
+        });
+
+        function joinCommunity(name) {
+            let joined = JSON.parse(
+                localStorage.getItem("joinedCommunities") || "[]"
+            );
+
+            if (joined.includes(name)) {
+                alert("You have already joined " + name);
+                return;
+            }
+
+            joined.push(name);
+
+            localStorage.setItem(
+                "joinedCommunities",
+                JSON.stringify(joined)
+            );
+
+            alert("Successfully joined " + name + "!");
+        }
+
+        function renderRegistrations() {
+            const registrations = JSON.parse(
+                localStorage.getItem("campusRegistrations") || "[]"
+            );
+
+            const list = document.getElementById("registrationList");
+
+            if (registrations.length === 0) {
+                list.innerHTML = '<p class="empty">No registrations found yet.</p>';
+            } else {
+                list.innerHTML = "";
+                registrations.forEach((item, index) => {
+                    list.innerHTML += `
+                        <div class="registration-card">
+                            <h3>${item.event}</h3>
+                            <p><b>Student:</b> ${item.name}</p>
+                            <p><b>Email:</b> ${item.email}</p>
+                            <p><b>Course:</b> ${item.course}</p>
+                            <p><b>Status:</b> Registered</p>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        renderRegistrations();
+
+        function vote(pollNumber, option) {
+
+            let votes = JSON.parse(
+                localStorage.getItem("campusVotes") || "{}"
+            );
+
+            let voteKey = "poll" + pollNumber;
+
+            if (votes[voteKey]) {
+                alert("You have already voted in this poll!");
+                return;
+            }
+
+            votes[voteKey] = option;
+
+            localStorage.setItem(
+                "campusVotes",
+                JSON.stringify(votes)
+            );
+
+            document.getElementById("result" + pollNumber).innerText =
+                "Your vote: " + option;
+
+            alert("Your vote has been submitted!");
+        }
+
+        window.onload = function() {
+            let votes = JSON.parse(
+                localStorage.getItem("campusVotes") || "{}"
+            );
+
+            for (let i = 0; i < 2; i++) {
+                if (votes["poll" + i]) {
+                    document.getElementById("result" + i).innerText =
+                        "Your vote: " + votes["poll" + i];
+                }
+            }
+        };
+
+        function showPage(name) {
+            if (name === "assistant") {
+                window.openCampusChat();
+                return;
+            }
+
+            document.querySelectorAll(".page").forEach(function (page) {
+                page.classList.remove("active");
+            });
+
+            var page = document.getElementById("page-" + name);
+            if (page) {
+                page.classList.add("active");
+            }
+
+            var titles = {
+                home: "CampusVerse | Your Campus Universe",
+                login: "Login | CampusVerse",
+                signup: "Sign Up | CampusVerse",
+                dashboard: "Student Dashboard | CampusVerse",
+                events: "Events & Fests | CampusVerse",
+                communities: "Communities | CampusVerse",
+                registrations: "My Registrations | CampusVerse",
+                polls: "Campus Polls | CampusVerse",
+                lost: "Lost & Found | CampusVerse",
+                clubs: "Clubs & Societies - CampusVerse",
+                assistant: "AI Assistant - CampusVerse"
+            };
+
+            if (titles[name]) {
+                document.title = titles[name];
+            }
+
+            window.scrollTo(0, 0);
+
+            if (name === "registrations") {
+                renderRegistrations();
+            }
+        }
+
+        function loginUser(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+
+            if (email && password) {
+                alert("Welcome to CampusVerse!");
+                showPage("dashboard");
+            }
+        }
+
+        function logoutUser() {
+            alert("You have logged out of CampusVerse!");
+            showPage("login");
+        }
+    </script>
+</body>
+</html>
